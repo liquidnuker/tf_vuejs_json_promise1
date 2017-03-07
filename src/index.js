@@ -52,10 +52,8 @@ const vmA = new Vue({
   el: "#app",
   data: {
     privateState: {},
-    sharedState: store.state
-  },
-  methods: {
-    seen: true
+    sharedState: store.state,
+    loader: true
   }
 });
 
@@ -69,7 +67,7 @@ const vmB = new Vue({
 
 // 
 // ======================================================/
-vmA.seen = true;
+vmA.loader = true;
 
 // loader.getJSON(ajaxUrl)
 //   .then(function (response) {

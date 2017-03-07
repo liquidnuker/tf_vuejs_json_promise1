@@ -17,8 +17,8 @@
     <p id="results">filter</p>
     <div id="app" class="app">
       <ul>
-        <li v-if="seen">seen=true</li>
-        <li v-else v-for="items in sharedState.message">
+        <li v-if="loader">loading...</li>
+        <li v-for="items in sharedState.message">
           {{ items.id }} <br>
           {{ items.thumb }} <br>
           <img v-bind:src="'img/' + items.id +'.jpg'">
