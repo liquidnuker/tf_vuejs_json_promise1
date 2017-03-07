@@ -1,12 +1,15 @@
 import "./styles/main.scss";
 
-import {where} from "underscore";
+import {
+  where
+}
+from "underscore";
 const Vue = require("./js/vendor/vue.min.js");
 
 // 
 // ======================================================/
-const ajaxUrl = "src/js/ajax/bonsai.json";
-const loader = {
+const jsonUrl = "src/js/ajax/bonsai.json";
+const jsonLoader = {
   start: (url) => {
     return new Promise(function (resolve, reject) {
       let req = new XMLHttpRequest();
@@ -28,12 +31,22 @@ const loader = {
     });
   },
   getJSON: (url) => {
-    return loader.start(url).then(JSON.parse);
+    return jsonLoader.start(url).then(JSON.parse);
   },
   filter: () => {
     store.state.message = where(store.state.message, {
       species: "Jukan"
     });
+  },
+  preloader: () => {
+    const spinner = `<div class="sk-wave">
+      <div class="sk-rect sk-rect1"></div>
+      <div class="sk-rect sk-rect2"></div>
+      <div class="sk-rect sk-rect3"></div>
+      <div class="sk-rect sk-rect4"></div>
+      <div class="sk-rect sk-rect5"></div>
+      </div>`;
+    document.getElementById("loader").innerHTML = spinner;
   }
 };
 
@@ -65,19 +78,10 @@ const vmB = new Vue({
   }
 });
 
-const spinner = `<div class="sk-wave">
-<div class="sk-rect sk-rect1"></div>
-<div class="sk-rect sk-rect2"></div>
-<div class="sk-rect sk-rect3"></div>
-<div class="sk-rect sk-rect4"></div>
-<div class="sk-rect sk-rect5"></div>
-</div>`;
-
-document.getElementById("loader").innerHTML = spinner;
-
 // 
 // ======================================================/
-loader.getJSON(ajaxUrl)
+jsonLoader.preloader();
+jsonLoader.getJSON(jsonUrl)
   .then(function (response) {
     // console.log(response.bonsai.length);
     store.state.message = response.bonsai;
@@ -86,7 +90,7 @@ loader.getJSON(ajaxUrl)
 
 (function () {
   var clickHandlers = function () {
-    document.getElementById("results").onclick = loader.filter;
+    document.getElementById("results").onclick = jsonLoader.filter;
   };
   if (document.readyState !== "loading") clickHandlers();
   else if (document.addEventListener) document.addEventListener("DOMContentLoaded", clickHandlers);
