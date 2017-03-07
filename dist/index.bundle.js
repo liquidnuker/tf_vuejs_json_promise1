@@ -3671,11 +3671,13 @@ var vmB = new Vue({
 // ======================================================/
 vmA.loader = true;
 
-// loader.getJSON(ajaxUrl)
-//   .then(function (response) {
-//     // console.log(response.bonsai.length);
-//     // store.state.message = response.bonsai;
-//   });
+loader.getJSON(ajaxUrl).then(function (response) {
+  // console.log(response.bonsai.length);
+  store.state.message = response.bonsai;
+  vmA.loader = false;
+}).then(function () {
+  // vmA.loader = false;
+});
 
 (function () {
   var clickHandlers = function clickHandlers() {
