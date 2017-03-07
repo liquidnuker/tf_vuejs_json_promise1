@@ -3655,6 +3655,9 @@ var vmA = new Vue({
   data: {
     privateState: {},
     sharedState: store.state
+  },
+  methods: {
+    seen: true
   }
 });
 
@@ -3668,10 +3671,13 @@ var vmB = new Vue({
 
 // 
 // ======================================================/
-loader.getJSON(ajaxUrl).then(function (response) {
-  // console.log(response.bonsai.length);
-  store.state.message = response.bonsai;
-});
+vmA.seen = true;
+
+// loader.getJSON(ajaxUrl)
+//   .then(function (response) {
+//     // console.log(response.bonsai.length);
+//     // store.state.message = response.bonsai;
+//   });
 
 (function () {
   var clickHandlers = function clickHandlers() {
