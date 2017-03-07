@@ -1,8 +1,8 @@
 const path = require('path');
 const webpack = require('webpack');
 const Promise = require("es6-promise").Promise;
-// const ExtractTextPlugin = require('extract-text-webpack-plugin');
-// const extractCSS = new ExtractTextPlugin('[name].bundle.css');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const extractCSS = new ExtractTextPlugin('[name].bundle.css');
 
 module.exports = {
   context: path.resolve(__dirname, './src'),
@@ -38,11 +38,9 @@ module.exports = {
       }
     ]
   },
-  // plugins: [
-  //   new webpack.ProvidePlugin({
-  //     Vue: 'vue',
-  //   })
-  // ],
+  plugins: [
+    extractCSS
+  ],
   resolve: {
     modules: [
       'D:/WINDOWS/GD2/web/dev/_npm/utils/underscore_1.8.3/node_modules'
