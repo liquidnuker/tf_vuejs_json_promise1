@@ -16,10 +16,10 @@ module.exports = {
   module: {
     rules: [
       // extractCSS
-      // {
-      //   test: /\.scss$/,
-      //   loader: extractCSS.extract(['css-loader', 'sass-loader'])
-      // },
+      {
+        test: /\.scss$/,
+        loader: extractCSS.extract(['css-loader', 'sass-loader'])
+      },
       // // url loader
       // {
       //   test: /\.(png|jpg|otf|ttf)$/,
